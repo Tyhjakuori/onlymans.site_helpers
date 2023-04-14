@@ -56,8 +56,9 @@ def refresh_conf(config, new_vals):
     get_section = config["DEFAULT"]
     type_capitalize = new_vals["token_type"].capitalize()
     get_section["authorization"] = "{} {}".format(type_capitalize, new_vals["access_token"])
-    config.add_section("UPDATED")
-    today = datetime.now()
+    if not config.has_section("UPDATED"):
+        config.add_section("UPDATED")
+    today = datetime.datetime.now()
     config.set("UPDATED", "; updated on {} with {}".format(today, new_vals), '')
     with open('.cfg.ini', 'w') as configfile:
         config.write(configfile)
