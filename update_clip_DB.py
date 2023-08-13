@@ -390,3 +390,8 @@ cur.execute(
     ),
 )
 conn.commit()
+
+cur.execute(
+    "UPDATE IGNORE clips JOIN game_ids ON clips.game_id = game_ids.id SET clips.game_name = game_ids.name"
+)
+conn.commit()
