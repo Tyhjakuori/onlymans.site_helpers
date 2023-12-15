@@ -57,3 +57,15 @@ cur.executemany(
     "UPDATE clips SET game_name=(?), game_id=(?), edited=(?) WHERE name=(?)", (values)
 )
 conn.commit()
+
+today_is = datetime.datetime.now()
+parsed = today_is.strftime("%Y-%m-%d %H:%M:%S")
+cur.execute(
+    "INSERT INTO db_updated (id, table_name, updated) VALUES (?,?,?)",
+    (
+        None,
+        "clips",
+        parsed,
+    ),
+)
+conn.commit()

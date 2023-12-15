@@ -57,3 +57,15 @@ cur.executemany(
     "UPDATE highlights SET game_name=(?), edited=(?) WHERE url=(?)", (values)
 )
 conn.commit()
+
+today_is = datetime.datetime.now()
+parsed = today_is.strftime("%Y-%m-%d %H:%M:%S")
+cur.execute(
+    "INSERT INTO db_updated (id, table_name, updated) VALUES (?,?,?)",
+    (
+        None,
+        "highlights",
+        parsed,
+    ),
+)
+conn.commit()
