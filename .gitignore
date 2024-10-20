@@ -1,2 +1,3 @@
 .cfg.ini
 *.log
+__pycache__
